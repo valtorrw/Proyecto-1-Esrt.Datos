@@ -9,6 +9,14 @@ package proyecto1;
  * @author valer
  */
 //La parte mas improtante, todo lo que se tenga que hacer con el gtado es aqui
+
+import java.util.HashMap;  
+
 public class Grafo {
     
+    private HashMap<String, Proteina> proteinas;  
+
+    public Grafo() {
+        this.proteinas = new HashMap<String, Proteina>(); 
+    } 
 }
