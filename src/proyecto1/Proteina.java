@@ -10,16 +10,16 @@ package proyecto1;
  * 
  */
 import java.util.ArrayList;
-import java.util.List;
 //La clase proteina tiene que tener el nombte de la misma y las coneziones que esta tiene con otras
+
 public class Proteina {
  
     private String nombre;
-    private List <Proteina> Enlaces;
+    private ArrayList <Enlace> Enlaces;
     
     
     //Inicializa la proteina
-    public Proteina(String nombre) {
+     public Proteina(String nombre) {
         this.nombre = nombre;
         this.Enlaces = new ArrayList<>();
     }
@@ -29,20 +29,20 @@ public class Proteina {
         return nombre;
     }
     
-    //Retorna los enlaces que tiene la proteina
-    public List<Proteina> getEnlaces() {
+    //Retorna los enlaces que tiene la proteina hay que cambiar
+     public ArrayList<Enlace> getEnlaces() {
         return Enlaces;
     }
     
-    public void agregarEnlace(Proteina p) {
-        if (Enlaces.contains(p) == false){
-            Enlaces.add(p);
-        }
+     
+     public void agregarEnlace(Proteina destino, int peso) {
+        Enlaces.add(new Enlace(destino, peso));
+    }
+
+    public void eliminarEnlace(Proteina p) {
+        Enlaces.removeIf(c -> c.getDestino().equals(p));
     }
     
-     public void eliminarEnlace(Proteina p) {
-        Enlaces.remove(p);
-    }
     
     @Override
     public String toString() {
