@@ -8,12 +8,14 @@ package proyecto1;
  *
  * @author valer
  */
-import java.io.BufferedReader;
-import java.io.FileReader;      
-import java.io.IOException;       
-
+import java.io.*;
+import java.util.ArrayList;
 
 public class ManagerArchivo {
+
+    // ==============================
+    // CARGAR ARCHIVO CSV
+    // ==============================
     public static void cargarCSV(String ruta, Grafo grafo) {
 
         try (BufferedReader br = new BufferedReader(new FileReader(ruta))) {
@@ -36,5 +38,83 @@ public class ManagerArchivo {
             e.printStackTrace();
         }
     }
-    
+
+    // ==============================
+    // PRUEBA BFS
+    // ==============================
+    public static void probarBFS(Grafo grafo) {
+
+        System.out.println("\n===== PRUEBA BFS =====");
+
+        ArrayList<String> recorrido = grafo.BFS();
+
+        for (String nombre : recorrido) {
+            System.out.print(nombre + " -> ");
+        }
+
+        System.out.println();
+    }
+
+    // ==============================
+    // PRUEBA DFS
+    // ==============================
+    public static void probarDFS(Grafo grafo) {
+
+        System.out.println("\n===== PRUEBA DFS =====");
+
+        ArrayList<String> recorrido = grafo.DFS();
+
+        for (String nombre : recorrido) {
+            System.out.print(nombre + " -> ");
+        }
+
+        System.out.println();
+    }
+
+    // ==============================
+    // PRUEBA DIJKSTRA
+    // ==============================
+    public static void probarDijkstra(Grafo grafo,
+                                      String origen,
+                                      String destino) {
+
+        System.out.println("\n===== PRUEBA DIJKSTRA =====");
+
+        ArrayList<String> ruta =
+                grafo.dijkstraRuta(origen, destino);
+
+        if (ruta.isEmpty()) {
+            System.out.println("No existe ruta.");
+            return;
+        }
+
+        System.out.println("Ruta más corta de "
+                + origen + " a " + destino + ":");
+
+        for (String nombre : ruta) {
+            System.out.print(nombre + " -> ");
+        }
+
+        System.out.println();
+    }
+
+    // ==============================
+    // MAIN DE PRUEBA
+    // ==============================
+    public static void main(String[] args) {
+
+        Grafo grafo = new Grafo();
+
+        // 🔹 Cambia la ruta por la de tu archivo
+        cargarCSV("interacciones.csv", grafo);
+
+        // Probar BFS
+        probarBFS(grafo);
+
+        // Probar DFS
+        probarDFS(grafo);
+
+        // Probar Dijkstra
+        probarDijkstra(grafo, "P1", "P9");
+    }
 }
